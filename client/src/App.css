@@ -45,6 +45,9 @@ input.name {
 }
 
 h2.page-not-found {
+    position: absolute;
+    top: 53px;
+    width: 100%;
     text-align: center;
 }
 
