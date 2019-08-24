@@ -1,0 +1,4 @@
+{
+    "mongoURI": "mongodb+srv://taskapp:taskapp2019@cluster0-oopfj.mongodb.net/react-chat",
+    "jwtSecret": "sl_myJwtSecret"
+}
