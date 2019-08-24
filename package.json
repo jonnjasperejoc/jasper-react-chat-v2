@@ -1,0 +1,27 @@
+{
+  "name": "react-chat",
+  "version": "1.0.0",
+  "description": "A simple chat application using MERN stack",
+  "main": "server.js",
+  "scripts": {
+    "client-install": "npm install --prefix client",
+    "test": "node server.js",
+    "server": "nodemon server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefex client && npm run build --prefix client"
+  },
+  "author": "Jonn Jasper Ejoc",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "concurrently": "^4.1.1",
+    "config": "^3.2.2",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.6.6",
+    "nodemon": "^1.19.1",
+    "react-router-dom": "^5.0.1",
+    "socket.io": "^2.2.0"
+  }
+}
