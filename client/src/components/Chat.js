@@ -73,57 +73,59 @@ class Chat extends Component {
     onSubmit = e => {
         e.preventDefault();
 
-        const chat = {
-            message: e.target.elements.message.value.trim(),
-            owner: this.state.id,
-            ownerName: this.state.name
-        }
-
-        const config = {
-            headers: {
-                'token': this.state.token
+        if (e.target.elements.message.value.trim()) {
+            const chat = {
+                message: e.target.elements.message.value.trim(),
+                owner: this.state.id,
+                ownerName: this.state.name
             }
-        };
 
-        this.setState({
-            messageDisabled: true,
-            sendDisabled: true
-        });
+            const config = {
+                headers: {
+                    'token': this.state.token
+                }
+            };
 
-        axios
-            .post('/api/chats', chat, config)
-            .then(res => {
-                this.setState({
-                    message: "",
-                    messageDisabled: false,
-                    sendDisabled: false
-                });
+            this.setState({
+                messageDisabled: true,
+                sendDisabled: true
+            });
 
-                const chats = this.props.chats;
-                chats.push({
-                    _id: res.data._id,
-                    message: chat.message,
-                    owner: chat.owner,
-                    ownerName: chat.ownerName
-                });
+            axios
+                .post('/api/chats', chat, config)
+                .then(res => {
+                    this.setState({
+                        message: "",
+                        messageDisabled: false,
+                        sendDisabled: false
+                    });
 
-                this.props.getChats(chats, true);
-                socket.emit('receive_chats', this.props.chats, (error) => {
-                    if (error) {
-                        console.log(error);
-                    }
-                });
+                    const chats = this.props.chats;
+                    chats.push({
+                        _id: res.data._id,
+                        message: chat.message,
+                        owner: chat.owner,
+                        ownerName: chat.ownerName
+                    });
 
-                this.scrollToBottom();
-            })
-            .catch(err => {
-                this.setState({
-                    messageDisabled: false,
-                    sendDisabled: false
-                });
-                console.log(err.response.data, err.response.status)
-                this.handleLogout();
-            })
+                    this.props.getChats(chats, true);
+                    socket.emit('receive_chats', this.props.chats, (error) => {
+                        if (error) {
+                            console.log(error);
+                        }
+                    });
+
+                    this.scrollToBottom();
+                })
+                .catch(err => {
+                    this.setState({
+                        messageDisabled: false,
+                        sendDisabled: false
+                    });
+                    console.log(err.response.data, err.response.status)
+                    this.handleLogout();
+                })
+        }
     }
 
     onChangeMessage = e => {
