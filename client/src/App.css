@@ -45,7 +45,7 @@ input.name {
 }
 
 h2.page-not-found {
-    position: fixed;
+    position: absolute;
     top: 53px;
     width: 100%;
     text-align: center;
@@ -55,6 +55,7 @@ h2.page-not-found {
     padding: 30px 15px;
     top: 53px;
     position: fixed;
+    width: calc(100% - 30px);
 }
 
 #logout {
